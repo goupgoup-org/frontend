@@ -16,16 +16,14 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   });
 
   return (
-    <>
-      <HelmetProvider>
-        <RecoilRoot>
-          <QueryClientProvider client={queryClient}>
-            <DefaultSeo {...SEOConfig} />
-            <Component {...pageProps} />
-          </QueryClientProvider>
-        </RecoilRoot>
-      </HelmetProvider>
-    </>
+    <HelmetProvider>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <DefaultSeo {...SEOConfig} />
+          <Component {...pageProps} />
+        </QueryClientProvider>
+      </RecoilRoot>
+    </HelmetProvider>
   );
 };
 
