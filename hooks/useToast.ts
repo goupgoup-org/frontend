@@ -1,3 +1,4 @@
+import { toastState } from "@/store/atom/toast/toastState";
 import { getRandomId } from "@/utils/etc";
 import { useRecoilState } from "recoil";
 
@@ -7,7 +8,7 @@ interface UseToastResult {
 }
 
 const useToast = (): UseToastResult => {
-  const [toasts, setToasts] = useRecoilState();
+  const [toasts, setToasts] = useRecoilState(toastState);
 
   const removeToast = (id: String) => {
     setToasts((prev: any) => prev.filter((toast: any) => toast.id !== id));
@@ -31,3 +32,5 @@ const useToast = (): UseToastResult => {
 
   return { toasts, firedToast };
 };
+
+export default useToast;

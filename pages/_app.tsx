@@ -5,6 +5,7 @@ import { HelmetProvider } from "react-helmet-async";
 import SEOConfig from "../next-seo.config";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
+import { Header } from "@/components/header/Header";
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const queryClient = new QueryClient({
@@ -19,6 +20,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     <HelmetProvider>
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
+          <Header />
           <DefaultSeo {...SEOConfig} />
           <Component {...pageProps} />
         </QueryClientProvider>

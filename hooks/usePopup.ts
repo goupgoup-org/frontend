@@ -1,3 +1,4 @@
+import { popupState } from "@/store/atom/popup/popupState";
 import { getRandomId } from "@/utils/etc";
 import { useRecoilState } from "recoil";
 
@@ -7,7 +8,7 @@ interface UsePopupResult {
   showPopup: (popup: any) => void;
 }
 const usePopup = (): UsePopupResult => {
-  const [popups, setPopups] = useRecoilState();
+  const [popups, setPopups] = useRecoilState(popupState);
 
   const removePopup = (id: string) => {
     setPopups((prev: any) => {
@@ -39,3 +40,5 @@ const usePopup = (): UsePopupResult => {
 
   return { popups, showPopup, removePopup };
 };
+
+export default usePopup;
