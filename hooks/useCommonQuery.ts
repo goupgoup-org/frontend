@@ -29,7 +29,7 @@ interface CommonQueryProps<TData> {
   query: QueryOptions<TData>;
   params?: any;
   callbacks?: {
-    onError?: () => void;
+    onError?: (error: any) => void;
     onSuccess?: (data: TData) => void;
   };
   initEnabled?: boolean;

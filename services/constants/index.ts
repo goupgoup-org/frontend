@@ -13,6 +13,7 @@ const API_URL = {
     LOGOUT: "/api/v1/member/logout",
     REISSUE: "/api/v1/member/reissue",
   },
+  MAIN: {},
 };
 
 export default API_URL;
