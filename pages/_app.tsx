@@ -6,6 +6,7 @@ import SEOConfig from "../next-seo.config";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import { Header } from "@/components/header/Header";
+import Popup from "@/components/popup/Popup";
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const queryClient = new QueryClient({
@@ -23,6 +24,8 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
           <Header />
           <DefaultSeo {...SEOConfig} />
           <Component {...pageProps} />
+
+          <Popup />
         </QueryClientProvider>
       </RecoilRoot>
     </HelmetProvider>

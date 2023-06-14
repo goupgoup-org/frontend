@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export interface Popup {
   visible: boolean;
-  list: object;
+  list: [];
 }
 
 export const popupState = atom<Popup>({
