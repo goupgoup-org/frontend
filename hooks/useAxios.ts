@@ -41,7 +41,8 @@ const useAxios = (): UseAxiosResponse<any> => {
 
       const axiosParams: AxiosRequestConfig = {
         method,
-        url: `${BASE_URL}${url}`,
+        // url: `${BASE_URL}${url}`,
+        url: url,
         ...params,
         headers: {
           ...headersConfig,
