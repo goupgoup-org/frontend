@@ -3,24 +3,33 @@ import useMain from "@/hooks/useMain";
 import { useCallback } from "react";
 
 export const MainPage = () => {
-  const handleLoadMore = useCallback(() => {
+  const handleLoadMore = () => {
     mainTest();
-  }, []);
+  };
 
-  const { targetRef, isFetching, pageNumber } = useInfiniteScroll(
-    handleLoadMore,
-    {
-      fetchThreshold: 0.8,
-    }
-  );
+  const { targetRef } = useInfiniteScroll(handleLoadMore, {
+    fetchThreshold: 0.8,
+  });
 
-  const { mainTest } = useMain(pageNumber, isFetching);
+  const {
+    data: { itemList },
+    action: { mainTest },
+  } = useMain();
 
   return (
-    <div ref={targetRef} style={{ height: 800, overflow: "scroll" }}>
+    <div>
       <div>
         <h1>메인</h1>
       </div>
+      <div>
+        {itemList?.map((el, index) => (
+          <div key={index} style={{ height: 200 }}>
+            {el.last_name}
+          </div>
+        ))}
+      </div>
+
+      <div ref={targetRef} />
     </div>
   );
 };

@@ -1,4 +1,6 @@
+import { infiniteScrollState } from "@/store/atom/common/infiniteScrollState";
 import { useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
 
 type Options = {
   root?: Element | null;
@@ -12,55 +14,44 @@ type InfiniteScrollOptions = Options & {
 
 const useInfiniteScroll = (
   callback: () => void,
-  options: InfiniteScrollOptions = {}
+  options: InfiniteScrollOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.8,
+  }
 ): {
   targetRef: React.RefObject<HTMLDivElement>;
-  isFetching: boolean;
-  pageNumber: number;
+  // isFetching: boolean;
+  // pageNumber: number;
 } => {
   const targetRef = useRef<HTMLDivElement>(null);
-  const [isFetching, setIsFetching] = useState(false);
-  const [pageNumber, setPageNumber] = useState(0);
+  const [scrollState, setScrollState] = useRecoilState(infiniteScrollState);
 
-  useEffect(() => {
-    const { root, rootMargin, threshold, fetchThreshold = 0.8 } = options;
+  const { isFetching, pageNum } = scrollState;
 
-    const observerOptions = {
-      root: root || null,
-      rootMargin: rootMargin || "0px",
-      threshold: threshold || 0.5,
-    };
+  const observerHandler: IntersectionObserverCallback = (entries) => {
+    const target = entries[0];
 
-    const handleObserver: IntersectionObserverCallback = (entries) => {
-      const target = entries[0];
-      console.log(pageNumber);
-      if (target.isIntersecting && !isFetching) {
-        setIsFetching(true);
-      }
-    };
+    if (target.isIntersecting && isFetching) {
+      console.log("start =====================");
+      setScrollState((prev) => ({
+        ...prev,
+        isFetching: false,
+        pageNum: prev.pageNum + 1,
+      }));
 
-    const observer = new IntersectionObserver(handleObserver, observerOptions);
-
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
-    }
-
-    return () => {
-      if (targetRef.current) {
-        observer.unobserve(targetRef.current);
-      }
-    };
-  }, [options, isFetching]);
-
-  useEffect(() => {
-    if (isFetching) {
       callback();
-      setPageNumber((prevPageNumber) => prevPageNumber + 1);
-      setIsFetching(false);
     }
-  }, [pageNumber]);
+  };
 
-  return { targetRef, isFetching, pageNumber };
+  useEffect(() => {
+    const observer = new IntersectionObserver(observerHandler, options);
+    if (targetRef.current) observer.observe(targetRef.current);
+
+    return () => observer.disconnect();
+  }, [pageNum, isFetching]);
+
+  return { targetRef };
 };
 
 export default useInfiniteScroll;
