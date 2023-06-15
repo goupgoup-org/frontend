@@ -24,11 +24,12 @@ const usePopup = (): UsePopupResult => {
 
   const showPopup = (popup: any) => {
     const popupId = getRandomId();
+    console.log("???");
 
     setPopups((prev: any) => ({
       ...prev,
       visible: true,
-      lis: [
+      list: [
         ...prev?.list,
         {
           ...popup,

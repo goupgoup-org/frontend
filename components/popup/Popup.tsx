@@ -13,7 +13,11 @@ const Popup = () => {
   const popups = useRecoilValue(popupState);
   const { removePopup } = usePopup();
 
-  const closeHandler = (id: string) => {
+  const closeHandler = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    id: string
+  ) => {
+    if (e.target !== e.currentTarget) return;
     removePopup(id);
   };
 
@@ -23,7 +27,7 @@ const Popup = () => {
         <Dimmed
           key={index}
           visible={popups?.visible}
-          onClick={() => closeHandler(popup.id)}
+          onClick={(e) => closeHandler(e, popup.id)}
         >
           <PopupItem {...popup} />
         </Dimmed>
@@ -40,7 +44,7 @@ const Dimmed = styled.div<DimmedProps>`
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.2);
   display: ${(props) => (props.visible ? "block" : "none")};
   z-index: 1000;
 `;
