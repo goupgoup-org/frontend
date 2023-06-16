@@ -3,7 +3,7 @@ import { useState } from "react";
 interface Tab {
   id: number;
   label: string;
-  content: string;
+  url: string;
 }
 
 interface UseTabMenuProps {

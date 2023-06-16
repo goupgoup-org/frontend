@@ -22,7 +22,7 @@ export const MainPage = () => {
         <h1>메인</h1>
       </div>
       <div>
-        {itemList?.map((el, index) => (
+        {itemList?.map((el: any, index: number) => (
           <div key={index} style={{ height: 200 }}>
             {el.last_name}
           </div>

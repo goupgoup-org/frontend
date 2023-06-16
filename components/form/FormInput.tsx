@@ -17,6 +17,7 @@ const FormInput = ({ name = "", type = "text", setValue, ...props }: Props) => {
       [e.target.name]: e.target.value,
     }));
   };
+
   return (
     <Input type={type} name={name} {...props} onChange={onChangeHandler} />
   );
