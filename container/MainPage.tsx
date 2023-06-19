@@ -1,3 +1,4 @@
+import Item from "@/components/main/Item";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 import useMain from "@/hooks/useMain";
 import { useCallback } from "react";
@@ -22,14 +23,15 @@ export const MainPage = () => {
         <h1>메인</h1>
       </div>
       <div>
-        {itemList?.map((el: any, index: number) => (
+        <Item />
+        {/* {itemList?.map((el: any, index: number) => (
           <div key={index} style={{ height: 200 }}>
             {el.last_name}
           </div>
-        ))}
+        ))} */}
       </div>
 
-      <div ref={targetRef} />
+      {/* <div ref={targetRef} /> */}
     </div>
   );
 };

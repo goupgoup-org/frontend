@@ -1,16 +1,20 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
 
 export interface SignIn {
-  userId: string;
-  password: string;
+  email: string;
+  nickname: string;
 }
 
-const signInInitialState = {
-  userId: "",
-  password: "",
+const userInitialState = {
+  email: "",
+  nickname: "",
 };
 
-export const signInValueState = atom<SignIn>({
-  key: "signInState",
-  default: signInInitialState,
+const { persistAtom } = recoilPersist();
+
+export const userStateValue = atom<SignIn>({
+  key: "userStateValue",
+  default: userInitialState,
+  effects_UNSTABLE: [persistAtom],
 });

@@ -8,6 +8,7 @@ import { RecoilRoot } from "recoil";
 import { Header } from "@/components/header/Header";
 import Popup from "@/components/popup/Popup";
 import GlobalStyles from "@/common/styled/global";
+import Head from "next/head";
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const queryClient = new QueryClient({
@@ -25,6 +26,9 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
           <GlobalStyles />
           <Header />
           <DefaultSeo {...SEOConfig} />
+          <Head>
+            <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+          </Head>
           <Component {...pageProps} />
 
           <Popup />
