@@ -1,4 +1,4 @@
-import useKakaoAuth from "@/hooks/useKakaoAuth";
+import useAuth from "@/hooks/useAuth";
 import axios from "axios";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -9,10 +9,9 @@ interface ResponseType {
   error?: any;
 }
 
-const Kakao: NextPage = () => {
-  const {} = useKakaoAuth();
-
+const AuthComplete: NextPage = () => {
+  const {} = useAuth();
   return <div>로그인 중</div>;
 };
 
-export default Kakao;
+export default AuthComplete;

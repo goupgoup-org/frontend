@@ -8,7 +8,7 @@ const API_URL = {
     DELETE: "delete",
   },
   AUTH: {
-    SIGNIN: "/api/v1/member/sign-in",
+    SIGNIN: "/api/user/oauth",
     SIGNUP: "/api/v1/member/signup",
     LOGOUT: "/api/v1/member/logout",
     REISSUE: "/api/v1/member/reissue",

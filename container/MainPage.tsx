@@ -1,22 +1,11 @@
 import Item from "@/components/main/Item";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 import useMain from "@/hooks/useMain";
+import { userStateValue } from "@/store/atom/auth/authState";
 import { useCallback } from "react";
+import { useRecoilValue } from "recoil";
 
 export const MainPage = () => {
-  const handleLoadMore = () => {
-    mainTest();
-  };
-
-  const { targetRef } = useInfiniteScroll(handleLoadMore, {
-    fetchThreshold: 0.8,
-  });
-
-  const {
-    data: { itemList },
-    action: { mainTest },
-  } = useMain();
-
   return (
     <div>
       <div>
